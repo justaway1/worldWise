@@ -17,7 +17,7 @@ function CityList () {
     <div>
       <ul className={styles.cityList}>
         {cities.map(city => (
-          <CityItem city={city} key={city.cityName} />
+          <CityItem city={city} key={city.id} />
         ))}
       </ul>
     </div>
