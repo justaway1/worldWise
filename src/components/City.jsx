@@ -17,6 +17,7 @@ function City () {
   const { getCity, currentCity, isLoading } = useCities()
   const { cityName, emoji, date, notes } = currentCity
 
+  console.log(currentCity)
   useEffect(() => {
     getCity(id)
   }, [id])

@@ -8,6 +8,10 @@ import BackButton from './BackButton'
 import Spinner from './Spinner'
 import { useMapGeoLocation } from '../hooks/useSearchGeoLocation'
 import Message from './Message'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import { useCities } from '../contexts/CitiesContext'
+import { useNavigate } from 'react-router-dom'
 
 export function convertToEmoji (countryCode) {
   const codePoints = countryCode
@@ -27,6 +31,8 @@ function Form () {
   const [notes, setNotes] = useState('')
   const [lat, lng] = useMapGeoLocation()
   const [isGeoLoading, setIsGeoLoading] = useState(false)
+  const { addNewCity, isLoading } = useCities()
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function fetchCityData () {
@@ -53,11 +59,30 @@ function Form () {
     fetchCityData()
   }, [lat, lng])
 
+  async function formSubmit (e) {
+    e.preventDefault()
+    const newCity = {
+      cityName,
+      date,
+      notes,
+      emoji,
+      position: {
+        lat,
+        lng
+      }
+    }
+    await addNewCity(newCity)
+    navigate('/app')
+  }
+
   if (geoError) return <Message message={geoError} />
   if (isGeoLoading) return <Spinner />
 
   return (
-    <form className={styles.form}>
+    <form
+      className={`${styles.form} ${isLoading ? styles.loading : ''}`}
+      onSubmit={formSubmit}
+    >
       <div className={styles.row}>
         <label htmlFor='cityName'>City name</label>
         <input
@@ -70,7 +95,11 @@ function Form () {
 
       <div className={styles.row}>
         <label htmlFor='date'>When did you go to {cityName}?</label>
-        <input id='date' onChange={e => setDate(e.target.value)} value={date} />
+        <DatePicker
+          id='date'
+          selected={date}
+          onChange={date => setDate(date)}
+        />
       </div>
 
       <div className={styles.row}>
