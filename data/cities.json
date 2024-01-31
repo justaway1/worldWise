@@ -1,15 +1,3 @@
 {
-  "cities": [
-    {
-      "id": "7ce7",
-      "cityName": "Tabriz",
-      "date": "2024-01-31T07:47:38.800Z",
-      "notes": "asdasda",
-      "emoji": "🇮🇷",
-      "position": {
-        "lat": "38.16911413556086",
-        "lng": "46.07666015625001"
-      }
-    }
-  ]
+  "cities": []
 }
