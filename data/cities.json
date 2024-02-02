@@ -1,3 +1,15 @@
 {
-  "cities": []
+  "cities": [
+    {
+      "id": "907a",
+      "cityName": "Yusufeli",
+      "date": "2024-02-02T09:00:05.799Z",
+      "notes": "asdas",
+      "emoji": "🇹🇷",
+      "position": {
+        "lat": "40.9964840143779",
+        "lng": "41.37451171875"
+      }
+    }
+  ]
 }
